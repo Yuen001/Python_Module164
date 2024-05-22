@@ -16,15 +16,41 @@ class FormWTFAjouterGenres(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_genre_wtf = StringField("Clavioter le genre ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    nom_genre_wtf = StringField("Object ", validators=[Length(min=2, max=20, message="min 2 max 20"),
                                                                    Regexp(nom_genre_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
-    submit = SubmitField("Enregistrer genre")
 
+
+    nombre_utilisation_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nombre_utilisation_wtf = StringField("Nombres Utilisation ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                     Regexp(nombre_utilisation_regexp,
+                                                            message="Pas de chiffres, de caractères "
+                                                                    "spéciaux, "
+                                                                    "d'espace à double, de double "
+                                                                    "apostrophe, de double trait union")
+                                                     ])
+    gouts_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    gouts_wtf = StringField("Gouts ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                              Regexp(gouts_regexp,
+                                                                     message="Pas de chiffres, de caractères "
+                                                                             "spéciaux, "
+                                                                             "d'espace à double, de double "
+                                                                             "apostrophe, de double trait union")
+                                                              ])
+    prix_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    prix_wtf = StringField("Prix ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                  Regexp(prix_regexp,
+                                                         message="Pas de chiffres, de caractères "
+                                                                 "spéciaux, "
+                                                                 "d'espace à double, de double "
+                                                                 "apostrophe, de double trait union")
+                                                  ])
+
+    submit = SubmitField("Enregistrer Object")
 
 class FormWTFUpdateGenre(FlaskForm):
     """
@@ -32,7 +58,7 @@ class FormWTFUpdateGenre(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_genre_update_wtf = StringField("Clavioter le genre ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    nom_genre_update_wtf = StringField("Caca ", validators=[Length(min=2, max=20, message="min 2 max 20"),
                                                                           Regexp(nom_genre_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -43,9 +69,21 @@ class FormWTFUpdateGenre(FlaskForm):
                                                                           ])
     date_genre_wtf_essai = DateField("Essai date", validators=[InputRequired("Date obligatoire"),
                                                                DataRequired("Date non valide")])
+
+
+    nombre_utilisation_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nombre_utilisation_update_wtf = StringField("Clavioter le genre ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                          Regexp(nombre_utilisation_update_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
+    date_genre_wtf_essai = DateField("Essai date", validators=[InputRequired("Date obligatoire"),
+                                                               DataRequired("Date non valide")])
     submit = SubmitField("Update genre")
-
-
 class FormWTFDeleteGenre(FlaskForm):
     """
         Dans le formulaire "genre_delete_wtf.html"

@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `t_fournisseur` (
   PRIMARY KEY (`ID_fournisseur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table ferreira_moreira_marco_expi1a.t_fournisseur : ~1 rows (environ)
+-- Listage des données de la table ferreira_moreira_marco_expi1a.t_fournisseur : ~0 rows (environ)
 INSERT INTO `t_fournisseur` (`ID_fournisseur`, `nom_entreprsie`, `Site internet`, `Adresse`, `Ville`) VALUES
 	(1, 'ISOK', 'https://vapora.ch/', 'Rte du Bois-des-Frères 81, 1219 Vernier, Suisse', 'Vernier');
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `t_lieu` (
   PRIMARY KEY (`ID_lieu`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table ferreira_moreira_marco_expi1a.t_lieu : ~1 rows (environ)
+-- Listage des données de la table ferreira_moreira_marco_expi1a.t_lieu : ~0 rows (environ)
 INSERT INTO `t_lieu` (`ID_lieu`, `Ville`, `Adresse`, `NPA`) VALUES
 	(1, 'Rolle', 'Chemin des Vignes', 1180);
 
@@ -133,11 +133,11 @@ CREATE TABLE IF NOT EXISTS `t_object` (
   `nom_object` varchar(100) DEFAULT NULL,
   `nombre_utilisation` varchar(100) DEFAULT NULL,
   `Gouts` varchar(100) DEFAULT NULL,
-  `Prix` varchar(100) DEFAULT NULL,
+  `Prix` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`ID_object`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table ferreira_moreira_marco_expi1a.t_object : ~21 rows (environ)
+-- Listage des données de la table ferreira_moreira_marco_expi1a.t_object : ~23 rows (environ)
 INSERT INTO `t_object` (`ID_object`, `nom_object`, `nombre_utilisation`, `Gouts`, `Prix`) VALUES
 	(1, 'ISOK PRO Peach Ice', '2000', 'Peach Ice', '15chf'),
 	(2, 'ISOK PRO Blueberry Ice ', '2000', 'Blueberry Ice ', '15chf'),
@@ -159,7 +159,9 @@ INSERT INTO `t_object` (`ID_object`, `nom_object`, `nombre_utilisation`, `Gouts`
 	(18, 'ISOK X Frozen Mango', '800', 'Frozen Mango', '7chf'),
 	(19, 'ISOK X Lust Ice ', '800', 'Lust Ice ', '7chf'),
 	(20, 'ISOK X Rainbow', '800', 'Rainbow', '7chf'),
-	(21, 'ISOK X Ice Mint', '800', 'Ice Mint', '7chf');
+	(21, 'ISOK X Ice Mint', '800', 'Ice Mint', '7chf'),
+	(23, 'schkeks', NULL, NULL, NULL),
+	(25, 'psgpasenfinal', NULL, NULL, NULL);
 
 -- Listage de la structure de table ferreira_moreira_marco_expi1a. t_vente
 DROP TABLE IF EXISTS `t_vente`;
