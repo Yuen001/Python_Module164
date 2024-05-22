@@ -33,17 +33,17 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                     "d'espace à double, de double "
                                                                     "apostrophe, de double trait union")
                                                      ])
-    gouts_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    gouts_wtf = StringField("Gouts ", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                              Regexp(gouts_regexp,
+    Gouts_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    Gouts_wtf = StringField("Gouts ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                              Regexp(Gouts_regexp,
                                                                      message="Pas de chiffres, de caractères "
                                                                              "spéciaux, "
                                                                              "d'espace à double, de double "
                                                                              "apostrophe, de double trait union")
                                                               ])
-    prix_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    prix_wtf = StringField("Prix ", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                  Regexp(prix_regexp,
+    Prix_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    Prix_wtf = StringField("Prix ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                  Regexp(Prix_regexp,
                                                          message="Pas de chiffres, de caractères "
                                                                  "spéciaux, "
                                                                  "d'espace à double, de double "
