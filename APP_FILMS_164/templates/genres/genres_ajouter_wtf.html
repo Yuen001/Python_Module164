@@ -17,18 +17,21 @@
 						{% for error in form.nom_genre_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
-						<p>
+					</p>
+					<p>
 						{{ form.nombre_utilisation_wtf.label }}<br>
 						{{ form.nombre_utilisation_wtf(size=32) }}<br>
 						{% for error in form.nombre_utilisation_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
+					</p>
 					<p>
 						{{ form.Gouts_wtf.label }}<br>
 						{{ form.Gouts_wtf(size=32) }}<br>
 						{% for error in form.Gouts_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
+					</p>
 					<p>
 						{{ form.Prix_wtf.label }}<br>
 						{{ form.Prix_wtf(size=32) }}<br>
