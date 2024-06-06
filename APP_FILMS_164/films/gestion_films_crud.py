@@ -29,18 +29,22 @@ Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_updat
 
 
 @app.route("/film_add", methods=['GET', 'POST'])
-def film_add_wtf():
+def film_add_wtf(adresse=None, NPA=None):
     # Objet formulaire pour AJOUTER un film
     form_add_film = FormWTFAddFilm()
     if request.method == "POST":
         try:
             if form_add_film.validate_on_submit():
                 nom_film_add = form_add_film.nom_film_add_wtf.data
+                adresse = form_add_film.adresse_add_wtf.data
+                NPA = form_add_film.NPA_add_wtf.data
 
-                valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add}
+                valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add,
+                                                  "value_adresse": adresse,
+                                                  "value_NPA": NPA}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_film (id_film,nom_film) VALUES (NULL,%(value_nom_film)s) """
+                strsql_insert_film = """INSERT INTO t_lieu (ID_lieu,Ville,Adresse,NPA) VALUES (NULL,%(value_nom_film)s,%(value_adresse)s,%(value_NPA)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -188,8 +192,8 @@ def film_delete_wtf():
             valeur_delete_dictionnaire = {"value_id_film": id_film_delete}
             print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-            str_sql_delete_fk_film_genre = """DELETE FROM t_genre_film WHERE fk_film = %(value_id_film)s"""
-            str_sql_delete_film = """DELETE FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_delete_fk_film_genre = """DELETE FROM t_lieu_object_stock WHERE FK_lieu_stock = %(value_id_film)s"""
+            str_sql_delete_film = """DELETE FROM t_lieu WHERE ID_lieu = %(value_id_film)s"""
             # Manière brutale d'effacer d'abord la "fk_film", même si elle n'existe pas dans la "t_genre_film"
             # Ensuite on peut effacer le film vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
             with DBconnection() as mconn_bd:
@@ -206,7 +210,7 @@ def film_delete_wtf():
             print(id_film_delete, type(id_film_delete))
 
             # Requête qui affiche le film qui doit être efffacé.
-            str_sql_genres_films_delete = """SELECT * FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_genres_films_delete = """SELECT * FROM t_lieu WHERE ID_lieu = %(value_id_film)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)

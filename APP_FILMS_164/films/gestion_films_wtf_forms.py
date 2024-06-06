@@ -24,6 +24,22 @@ class FormWTFAddFilm(FlaskForm):
                                                                               "d'espace à double, de double "
                                                                               "apostrophe, de double trait union")
                                                                ])
+    adresse_regexp = ""
+    adresse_add_wtf = StringField("Adresse ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+                                                               Regexp(adresse_regexp,
+                                                                      message="Pas de chiffres, de caractères "
+                                                                              "spéciaux, "
+                                                                              "d'espace à double, de double "
+                                                                              "apostrophe, de double trait union")
+                                                               ])
+    NPA_regexp = ""
+    NPA_add_wtf = StringField("NPA ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+                                                          Regexp(NPA_regexp,
+                                                                 message="Pas de chiffres, de caractères "
+                                                                         "spéciaux, "
+                                                                         "d'espace à double, de double "
+                                                                         "apostrophe, de double trait union")
+                                                          ])
 
     submit = SubmitField("Enregistrer film")
 
