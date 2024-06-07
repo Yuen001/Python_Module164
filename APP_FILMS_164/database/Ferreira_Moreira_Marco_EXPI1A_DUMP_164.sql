@@ -1,15 +1,3 @@
--- OM 2021.02.17
--- FICHIER MYSQL POUR FAIRE FONCTIONNER LES EXEMPLES
--- DE REQUETES MYSQL
--- Database: MACCAUD_OLIVIER_INFO1X_FILMS_164_2023
-
--- Destruction de la BD si elle existe.
--- Pour être certain d'avoir la dernière version des données
-
--- Création d'un nouvelle base de donnée
-
--- Utilisation de cette base de donnée
--- --------------------------------------------------------
 -- --------------------------------------------------------
 -- Hôte:                         127.0.0.1
 -- Version du serveur:           8.0.30 - MySQL Community Server - GPL
@@ -77,11 +65,14 @@ CREATE TABLE IF NOT EXISTS `t_lieu` (
   `Adresse` varchar(100) DEFAULT NULL,
   `NPA` int DEFAULT NULL,
   PRIMARY KEY (`ID_lieu`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table ferreira_moreira_marco_expi1a.t_lieu : ~0 rows (environ)
+-- Listage des données de la table ferreira_moreira_marco_expi1a.t_lieu : ~3 rows (environ)
 INSERT INTO `t_lieu` (`ID_lieu`, `Ville`, `Adresse`, `NPA`) VALUES
-	(1, 'Rolle', 'Chemin des Vignes', 1180);
+	(1, 'Rolle', 'Chemin des Vignes 2', 1180),
+	(5, 'Nyon', 'Chem. du Chêne 8', 1260),
+	(6, 'Allaman', 'Rte de la Plage 4', 1165),
+	(7, 'Mabaupe', 'Real Madrid', 12);
 
 -- Listage de la structure de table ferreira_moreira_marco_expi1a. t_lieu_object_destock
 DROP TABLE IF EXISTS `t_lieu_object_destock`;
@@ -135,9 +126,9 @@ CREATE TABLE IF NOT EXISTS `t_object` (
   `Gouts` varchar(100) DEFAULT NULL,
   `Prix` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`ID_object`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table ferreira_moreira_marco_expi1a.t_object : ~23 rows (environ)
+-- Listage des données de la table ferreira_moreira_marco_expi1a.t_object : ~21 rows (environ)
 INSERT INTO `t_object` (`ID_object`, `nom_object`, `nombre_utilisation`, `Gouts`, `Prix`) VALUES
 	(1, 'ISOK PRO Peach Ice', '2000', 'Peach Ice', '15chf'),
 	(2, 'ISOK PRO Blueberry Ice ', '2000', 'Blueberry Ice ', '15chf'),
@@ -160,8 +151,7 @@ INSERT INTO `t_object` (`ID_object`, `nom_object`, `nombre_utilisation`, `Gouts`
 	(19, 'ISOK X Lust Ice ', '800', 'Lust Ice ', '7chf'),
 	(20, 'ISOK X Rainbow', '800', 'Rainbow', '7chf'),
 	(21, 'ISOK X Ice Mint', '800', 'Ice Mint', '7chf'),
-	(23, 'schkeks', NULL, NULL, NULL),
-	(25, 'psgpasenfinal', NULL, NULL, NULL);
+	(29, 'psgpasenfinal', 'Rawr', 'kakaka', 'tg');
 
 -- Listage de la structure de table ferreira_moreira_marco_expi1a. t_vente
 DROP TABLE IF EXISTS `t_vente`;
@@ -187,4 +177,3 @@ INSERT INTO `t_vente` (`ID_argent_reçu`, `ID_object`, `Prix`, `Quantite`, `Rais
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
-
