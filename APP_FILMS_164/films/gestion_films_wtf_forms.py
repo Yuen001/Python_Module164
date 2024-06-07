@@ -50,7 +50,7 @@ class FormWTFUpdateFilm(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     ville_update_regexp = ""
-    ville_update_wtf = StringField("NPA ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    ville_update_wtf = StringField("Ville ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                      Regexp(ville_update_regexp,
                                                             message="Pas de chiffres, de caractères "
                                                                     "spéciaux, "
@@ -58,7 +58,7 @@ class FormWTFUpdateFilm(FlaskForm):
                                                                     "apostrophe, de double trait union")
                                                      ])
     adresse_update_regexp = ""
-    adresse_update_wtf = StringField("NPA ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    adresse_update_wtf = StringField("Adresse ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                      Regexp(adresse_update_regexp,
                                                             message="Pas de chiffres, de caractères "
                                                                     "spéciaux, "

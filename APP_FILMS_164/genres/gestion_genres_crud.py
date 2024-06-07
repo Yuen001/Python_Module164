@@ -12,6 +12,7 @@ from flask import url_for
 from APP_FILMS_164 import app
 from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
+from APP_FILMS_164.films.gestion_films_wtf_forms import FormWTFUpdateFilm
 from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFAjouterGenres
 from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFDeleteGenre
 from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFUpdateGenre
@@ -112,7 +113,7 @@ def genres_ajouter_wtf():
                                                   "value_prix": prix}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_genre = """INSERT INTO t_object (id_object,Nom_object,nombre_utilisation,Gouts,Prix) 
+                strsql_insert_genre = """INSERT INTO t_object (id_object,nom_object,nombre_utilisation,Gouts,Prix) 
                 VALUES (NULL,%(value_intitule_genre)s,%(value_util)s,%(value_gouts)s,%(value_prix)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
@@ -124,9 +125,10 @@ def genres_ajouter_wtf():
                 return redirect(url_for('genres_afficher', order_by='DESC', id_genre_sel=0))
 
         except Exception as Exception_genres_ajouter_wtf:
-            raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
-                                            f"{genres_ajouter_wtf.__name__} ; "
-                                            f"{Exception_genres_ajouter_wtf}")
+            # Vérifiez si genres_ajouter_wtf est None avant d'essayer d'accéder à __name__
+                raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
+                                                f"{genres_ajouter_wtf.__name__} ; "
+                                                f"{Exception_genres_ajouter_wtf}")
 
     return render_template("genres/genres_ajouter_wtf.html", form=form)
 
@@ -149,6 +151,10 @@ def genres_ajouter_wtf():
                 Pour comprendre [A-Za-zÀ-ÖØ-öø-ÿ] il faut se reporter à la table ASCII https://www.ascii-code.com/
                 Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
 """
+
+
+class ID_lieu_update:
+    pass
 
 
 @app.route("/genre_update", methods=['GET', 'POST'])
@@ -199,7 +205,7 @@ def genre_update_wtf(gouts_update_wtf=None, nombr_util_update=None):
                   data_nom_genre["Gouts"])
 
             # Afficher la valeur sélectionnée dans les champs du formulaire "genre_update_wtf.html"
-            form_update.nom_genre_update_wtf.data = data_nom_genre["nom_object"]
+            form_update.nom_object_update_wtf.data = data_nom_genre["nom_object"]
             form_update.gouts_update_wtf.data = data_nom_genre["Gouts"]
             form_update.nombr_util_update_wtf.data = data_nom_genre["nombre_utilisation"]
             form_update.prix_update_wtf.data = data_nom_genre["Prix"]
@@ -210,6 +216,8 @@ def genre_update_wtf(gouts_update_wtf=None, nombr_util_update=None):
                                       f"{Exception_genre_update_wtf}")
 
     return render_template("genres/genre_update_wtf.html", form_update=form_update)
+
+
 
 
 """

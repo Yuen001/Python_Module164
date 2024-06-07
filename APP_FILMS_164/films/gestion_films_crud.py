@@ -83,9 +83,9 @@ class NPA_update:
 
 
 @app.route("/film_update", methods=['GET', 'POST'])
-def film_update_wtf(ville_update=None, adresse_update=None):
+def film_update_wtf(ville_update=None, adresse_update=None, NPA_update=None):
     # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_film"
-    id_film_update = request.values['id_film_btn_edit_html']
+    ID_lieu_update = request.values['id_film_btn_edit_html']
 
     # Objet formulaire pour l'UPDATE
     form_update_film = FormWTFUpdateFilm()
@@ -98,43 +98,46 @@ def film_update_wtf(ville_update=None, adresse_update=None):
             adresse_update = form_update_film.adresse_update_wtf.data
             NPA_update = form_update_film.NPA_update_wtf.data
 
-            valeur_update_dictionnaire = {"value_id_film": id_film_update,
+            valeur_update_dictionnaire = {"value_id_lieu": ID_lieu_update,
                                           "Value_ville": ville_update,
                                           "value_adresse": adresse_update,
-                                          "value_NPA": NPA_update
+                                          "value_NPA": NPA_update}
 
-                                          }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE t_lieu SET Ville = %(Value_ville)s,
-                                                            Adresse = %(value_adresse)s,
-                                                            NPA = %(value_NPA)s
-                                                            WHERE ID_Lieu = %(value_id_film)s"""
+            str_sql_update_nom_lieu = """UPDATE t_lieu SET Ville = %(value_ville)s,
+                                                    Adresse = %(value_adresse)s,
+                                                    NPA = %(value_NPA)s
+                                                    WHERE ID_Lieu = %(value_id_lieu)s"""
             with DBconnection() as mconn_bd:
-                mconn_bd.execute(str_sql_update_nom_film, valeur_update_dictionnaire)
+                mconn_bd.execute(str_sql_update_nom_lieu, valeur_update_dictionnaire)
 
             flash(f"Donnée mise à jour !!", "success")
             print(f"Donnée mise à jour !!")
 
             # afficher et constater que la donnée est mise à jour.
-            # Afficher seulement le film modifié, "ASC" et l'"id_film_update"
-            return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
+            # Afficher seulement le lieu modifié, "ASC" et l'"ID_lieu_update"
+            return redirect(url_for('films_genres_afficher', id_lieu_sel=ID_lieu_update))
         elif request.method == "GET":
-            # Opération sur la BD pour récupérer "id_film" et "intitule_genre" de la "t_genre"
-            str_sql_id_film = "SELECT * FROM t_lieu WHERE ID_lieu = %(value_id_film)s"
-            valeur_select_dictionnaire = {"value_id_film": id_film_update}
+            # Opération sur la BD pour récupérer "ID_lieu" et "intitule_genre" de la "t_genre"
+            str_sql_id_lieu = "SELECT * FROM t_lieu"
+            valeur_select_dictionnaire = {"value_id_lieu": ID_lieu_update}
             with DBconnection() as mybd_conn:
-                mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
+                mybd_conn.execute(str_sql_id_lieu, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
-            data_film = mybd_conn.fetchone()
-            print("data_film ", data_film, " type ", type(data_film), " genre ",
-                  data_film["Ville"])
+            data_lieu = mybd_conn.fetchone()
 
-            # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
-            form_update_film.ville_update_wtf.data = data_film["Ville"]
-            form_update_film.adresse_update_wtf.data = data_film["Adresse"]
-            # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
-            form_update_film.NPA_update_wtf.data = data_film["NPA"]
+            if data_lieu:  # Check if data_lieu is not None
+                print("data_lieu ", data_lieu, " type ", type(data_lieu), " genre ",
+                      data_lieu["Ville"])
+
+                # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
+                form_update_film.ville_update_wtf.data = data_lieu["Ville"]
+                form_update_film.adresse_update_wtf.data = data_lieu["Adresse"]
+                # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
+                form_update_film.NPA_update_wtf.data = data_lieu["NPA"]
+            else:
+                flash(f"Erreur: Aucune donnée trouvée pour ID {ID_lieu_update}", "danger")
 
     except Exception as Exception_film_update_wtf:
         raise ExceptionFilmUpdateWtf(f"fichier : {Path(__file__).name}  ;  "
